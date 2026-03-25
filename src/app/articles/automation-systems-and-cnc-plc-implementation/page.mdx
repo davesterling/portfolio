@@ -1,0 +1,105 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import image9 from '@/images/photos/9.png'
+import image7 from '@/images/photos/11.jpeg'
+import image5 from '@/images/photos/5.jpeg'
+import image10 from '@/images/photos/10.jpeg'
+
+export const article = {
+  author: 'Dave Sterling',
+  date: '2026-03-25',
+  title: 'Automation Engineering: Robotics, CNC, and Production Systems',
+  description:
+    'Hands-on experience designing and deploying industrial automation systems, including robotic cells, CNC machining workflows, CAD/CAM pipelines, and production-ready product lines.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default function Page(props) {
+  return (
+    <ArticleLayout article={article} {...props}>
+      <p>
+        My work in automation engineering has focused on building reliable, high-throughput systems that connect robotics, CNC machinery, and production workflows. The goal has consistently been to design solutions that improve efficiency, reduce manual intervention, and operate predictably in real-world manufacturing environments.
+      </p>
+
+      <p>
+        This includes integrating robotic systems with machining centers, developing CAD/CAM pipelines, and creating production-ready documentation that allows designs to move seamlessly from concept to the shop floor.
+      </p>
+
+      <div className="my-6">
+        <Image src={image9} alt="automation" />
+      </div>
+
+      <p>
+        Across multiple projects, I’ve worked on both the design and execution sides of manufacturing systems, ensuring that software, machines, and processes operate together efficiently.
+      </p>
+
+      <h2>Robotics and automation systems</h2>
+
+      <p>
+        I programmed and deployed ABB robotic systems, including an ABB 4600 robot integrated with a Bridgeport XR800 APC (Automatic Pallet Changer) to automate machine tending operations. This setup allowed continuous part processing with minimal operator input, significantly increasing throughput.
+      </p>
+
+      <p>
+        I also developed and programmed a 10-axis, two-pallet robotic welding cell using ABB systems, designed for high-throughput production. The system coordinated multiple axes of motion and welding sequences to maintain consistency and speed under production load.
+      </p>
+
+      <div className="my-6">
+        <Image src={image7} alt="robotics" />
+      </div>
+
+      <h2>CNC machining and CAM workflows</h2>
+
+      <p>
+        My experience includes programming and optimizing CNC machining processes across multiple machines, including Bridgeport VMC 760, V1000, and APC1000 systems. I developed CAM programs to ensure efficient toolpaths, proper material removal, and consistent part quality.
+      </p>
+
+      <p>
+        I also programmed a Mitsubishi 2512 4x8’ CNC laser system, creating cutting strategies and layouts optimized for speed and material utilization. In addition, I generated DXF files for a Sodick wire EDM machine, supporting precision cutting operations.
+      </p>
+
+      <div className="my-6">
+        <Image src={image5} alt="cnc" />
+      </div>
+
+      <h2>Product design and production systems</h2>
+
+      <p>
+        I designed and launched four complete product lines using Autodesk Inventor and AutoCAD, taking each from initial concept through production release. This included creating detailed CAD models, assemblies, and production-ready drawings.
+      </p>
+
+      <p>
+        I developed SOPs and manufacturing documentation to ensure repeatability and consistency on the shop floor, enabling efficient scaling of production processes.
+      </p>
+
+      <ul>
+        <li>Design and model parts and assemblies</li>
+        <li>Create production drawings and documentation</li>
+        <li>Develop SOPs for manufacturing workflows</li>
+        <li>Support product launch and floor integration</li>
+        <li>Ensure repeatability and process reliability</li>
+      </ul>
+
+      <div className="my-6">
+        <Image src={image10} alt="design" />
+      </div>
+
+      <h2>Engineering standards and documentation</h2>
+
+      <p>
+        I handled detailed production drawings with full GD&T, ensuring parts met required tolerances and functioned correctly within assemblies. This included dimensioning, tolerance stacking considerations, and manufacturing constraints.
+      </p>
+
+      <p>
+        In addition, I created patent drawings that were submitted through the official patent process, requiring precise technical illustration and adherence to formal documentation standards.
+      </p>
+
+      <p>
+        By combining robotics, CNC machining, CAD/CAM workflows, and production engineering, I’ve built systems that move efficiently from design to manufacturing while maintaining precision, reliability, and scalability.
+      </p>
+    </ArticleLayout>
+  )
+}

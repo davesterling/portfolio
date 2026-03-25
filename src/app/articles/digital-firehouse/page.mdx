@@ -1,0 +1,132 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Dave Sterling',
+  date: '2026-03-25',
+  title: 'Building Digital Firehouse: Systems for real-world operations',
+  description:
+    'Digital Firehouse was built to handle real-world fire department operations, combining scalable infrastructure, real-time systems, and automation into a single platform designed for reliability and performance.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default function Page(props) {
+  return (
+    <ArticleLayout article={article} {...props}>
+      <p>
+        When building Digital Firehouse, the focus wasn’t just on creating a web application, but on designing a system that could handle real-world operational demands. Fire departments require tools that are reliable, fast, and capable of managing both routine workflows and critical, time-sensitive events.
+      </p>
+
+      <p>
+        To support this, the platform was built as a collection of interconnected systems, combining modern web development with real-time infrastructure and automation.
+      </p>
+
+      <pre><code>{`export function Platform() {
+  return {
+    members: true,
+    scheduling: true,
+    calls: true,
+    notifications: true,
+    payments: true,
+    documents: true,
+    automation: true,
+  }
+}`}</code></pre>
+
+      <p>
+        Digital Firehouse brings together multiple operational systems into a single platform, allowing departments to manage members, track activity, process calls, and communicate across web and mobile environments.
+      </p>
+
+      <h2>Core systems and architecture</h2>
+
+      <p>
+        The platform includes a full member management system with role-based permissions, rank and group assignment, and activity tracking. Scheduling tools allow departments to manage availability, create events, and notify members instantly, increasing engagement and coordination.
+      </p>
+
+      <p>
+        A real-time call logging system was built to receive and process incoming data from external systems, including PSAPs. Incoming call data is parsed, normalized, and distributed across the platform, ensuring that users receive updates instantly on both the web application and mobile devices.
+      </p>
+
+      <pre><code>{`if (event === 'call_received') {
+  logCall()
+  notifyMembers()
+  updateDashboard()
+}`}</code></pre>
+
+      <p>
+        Notifications are handled through a unified system that connects push notifications, email delivery, and in-app alerts, ensuring reliable communication across all channels.
+      </p>
+
+      <h2>Infrastructure and cloud systems</h2>
+
+      <p>
+        The infrastructure was designed using AWS services to ensure scalability, performance, and reliability. Static assets and uploaded files are stored in S3, while CloudFront is used to distribute content globally with low latency.
+      </p>
+
+      <p>
+        Application servers are hosted on Lightsail instances, providing a balance between simplicity and performance, while separate database servers are provisioned to isolate workloads and maintain system stability. These systems are connected through secure networking, allowing efficient communication between services.
+      </p>
+
+      <p>
+        Route 53 is used for DNS management and domain routing, ensuring reliable access to all services. A provisioning system was developed to automate infrastructure setup, using least-privilege AWS credentials to create DNS records and CloudFront distributions automatically, allowing new environments to be deployed with a single action.
+      </p>
+
+      <pre><code>{`const provision = async () => {
+  await createDNSRecord()
+  await createCloudFrontDistribution()
+  await attachSSL()
+}`}</code></pre>
+
+      <h2>Payments, communication, and automation</h2>
+
+      <p>
+        The platform includes integrated payment systems for subscriptions, fundraising, and donations, allowing departments to manage financial operations directly within the application.
+      </p>
+
+      <p>
+        A custom email system is hosted on Lightsail, backed by WorkMail for scalable architecture. SES is used for outbound email delivery and notification handling, ensuring reliable communication between the platform and its users.
+      </p>
+
+      <p>
+        Automation plays a key role in reducing manual work. Event-driven workflows trigger actions across the system, allowing processes such as notifications, logging, and updates to occur automatically based on system activity.
+      </p>
+
+      <ul>
+        <li>Manage members, roles, and activity</li>
+        <li>Process and log calls in real time</li>
+        <li>Deliver notifications across web and mobile</li>
+        <li>Handle payments and financial workflows</li>
+        <li>Automate system events and communication</li>
+      </ul>
+
+      <pre><code>{`function handleEvent(event) {
+  process(event)
+  dispatchNotifications()
+  persistData()
+}`}</code></pre>
+
+      <h2>Real-time communication systems</h2>
+
+      <p>
+        To support real-world emergency operations, systems were built to receive incoming call data from PSAPs and relay that information across the platform. These events are processed and delivered to both the web application and React Native mobile app in real time.
+      </p>
+
+      <p>
+        Notification pipelines connect WorkMail and SES systems to trigger alerts, ensuring that users receive timely updates through multiple channels. This allows critical information to move quickly and reliably between systems.
+      </p>
+
+      <pre><code>{`if (event === 'incoming_psap_call') {
+  normalizeData()
+  broadcastToClients()
+  sendPushNotification()
+}`}</code></pre>
+
+      <p>
+        By combining scalable cloud infrastructure, real-time data processing, and automation, Digital Firehouse provides a unified platform designed to handle the demands of real-world operations while remaining efficient, reliable, and easy to use.
+      </p>
+    </ArticleLayout>
+  )
+}

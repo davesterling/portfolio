@@ -1,0 +1,36 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import designSystem from '@/images/photos/aws.webp'
+
+export const article = {
+  author: 'Dave Sterling',
+  date: '2026-03-25',
+  title: 'Building scalable infrastructure for real-time systems',
+  description:
+    'Most applications are built for simple use cases, but we needed to design and deploy infrastructure that could handle real-time data, high availability, and seamless scaling across cloud services.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Most applications are built to handle predictable workloads, but for our platform we needed to design infrastructure that could reliably process real-time emergency data, scale with demand, and remain highly available under constant use.
+
+<Image src={designSystem} alt="" />
+
+I approached the system by breaking it into independent services, leveraging AWS to handle storage, compute, networking, and distribution. Static assets and user uploads were stored in S3, while CloudFront was used to cache and distribute content globally with low latency.
+
+## Infrastructure and system design
+
+The core applications were deployed using Lightsail instances for simplicity and cost control, while separate servers were provisioned for database workloads to ensure performance isolation. These systems were linked through secure networking, allowing the web application, APIs, and databases to communicate efficiently without exposing unnecessary access.
+
+Route 53 was used to manage DNS and domain routing, enabling reliable resolution and traffic management. To streamline onboarding, I built a system that programmatically provisions DNS records and CloudFront distributions using least-privilege AWS credentials, allowing new environments to be deployed with a single action from within the application.
+
+```js
+const provision = async () => {
+  await createDNSRecord()
+  await createCloudFrontDistribution()
+  await attachSSL()
+}
