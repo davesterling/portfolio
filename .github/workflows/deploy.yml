@@ -1,4 +1,4 @@
-name: Deploy Development to S3 Cloudfront
+name: Deploy Portfolio to S3 Cloudfront
 
 on:
   push:
