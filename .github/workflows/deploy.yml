@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install dependencies and build
         run: |
@@ -35,18 +35,8 @@ jobs:
 
       - name: Sync dist/ to S3
         run: aws s3 sync dist/ s3://${{ vars.S3_BUCKET_PORTFOLIO }} --delete
-      - name: Invalidate Specific CloudFront Tenant Distribution
-        env:
-          DIST_ID: ${{ vars.DISTRIBUTION_ID }}
+      - name: Invalidate CloudFront
         run: |
-          echo "Invalidating tenant distribution: $DIST_ID"
-        
-          aws cloudfront create-invalidation-for-distribution-tenant \
-            --id "$DIST_ID" \
-            --invalidation-batch "{
-              \"Paths\": {
-                \"Quantity\": 1,
-                \"Items\": [\"/*\"]
-              },
-              \"CallerReference\": \"invalidation-$(date +%s)\"
-            }"
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.DISTRIBUTION_ID }} \
+            --paths "/*"
