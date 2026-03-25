@@ -3,7 +3,7 @@ name: Deploy Portfolio to S3 Cloudfront
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   deploy:
