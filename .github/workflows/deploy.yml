@@ -1,0 +1,52 @@
+name: Deploy Development to S3 Cloudfront
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Sync dist/ to S3
+        run: aws s3 sync dist/ s3://${{ vars.S3_BUCKET_PORTFOLIO }} --delete
+      - name: Invalidate Specific CloudFront Tenant Distribution
+        env:
+          DIST_ID: ${{ vars.DISTRIBUTION_ID }}
+        run: |
+          echo "Invalidating tenant distribution: $DIST_ID"
+        
+          aws cloudfront create-invalidation-for-distribution-tenant \
+            --id "$DIST_ID" \
+            --invalidation-batch "{
+              \"Paths\": {
+                \"Quantity\": 1,
+                \"Items\": [\"/*\"]
+              },
+              \"CallerReference\": \"invalidation-$(date +%s)\"
+            }"
