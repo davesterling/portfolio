@@ -16,12 +16,12 @@ export async function GET(req: Request) {
 
   let feed = new Feed({
     title: author.name,
-    description: 'Your blog description',
+    description: 'Inventor, programmer, and builder of scalable systems and automation.',
     author,
     id: siteUrl,
     link: siteUrl,
-    image: `https://dave.s3.us-east-2.amazonaws.com/Screenshot+2026-03-24+at+9.36.43%E2%80%AFPM.png`,
-    favicon: `https://dave.s3.us-east-2.amazonaws.com/Screenshot+2026-03-24+at+9.36.43%E2%80%AFPM.png`,
+    image: '@/images/avatar.jpeg',
+    favicon: '@/images/avatar.jpeg',
     copyright: `All rights reserved ${new Date().getFullYear()}`,
     feedLinks: {
       rss2: `${siteUrl}/feed.xml`,
