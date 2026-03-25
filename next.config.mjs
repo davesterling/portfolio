@@ -9,7 +9,6 @@ const nextConfig = {
   images: {
     domains: ["dave.s3.us-east-2.amazonaws.com"],
   },
-  output: 'export',
 }
 
 const withMDX = nextMDX({
